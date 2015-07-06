@@ -2,6 +2,7 @@ package joe.grabbag;
 
 import static org.junit.Assert.*;
 
+import java.util.Map;
 import java.util.Set;
 
 import joe.grabbag.FirstAlgorthim;
@@ -42,6 +43,26 @@ public class FirstAlgorthimTest{
 		assertTrue(set.contains("Macaire"));
 		assertTrue(set.contains("Isabelle"));
 		
+	}
+	
+	@Test
+	public void testgiftMap(){
+		for (int i=0;i<20;i++){
+			int size=100;
+			Map<Integer,Integer> map=FirstAlgorthim.giftMap(size);
+			Set<Integer> keys=map.keySet();
+			Set<Integer> values=ImmutableSet.copyOf(map.values());
+			assertEquals(map.size(),size);
+			assertEquals(keys.size(),size);
+			assertEquals(values.size(),size);
+			for(int j=0;j<size;j++){
+				assertTrue(keys.contains(j));
+				assertTrue(values.contains(j));
+			}
+			for (Map.Entry<Integer, Integer> entry:map.entrySet()){
+				assertNotEquals(entry.getKey(),entry.getValue());
+			}
+		}
 	}
 
 }

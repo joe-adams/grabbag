@@ -23,7 +23,7 @@ public class FirstAlgorthim {
 	
 	}
 	
-	private static Map<Integer,Integer> giftMap(int numberOfParticipants){
+	static Map<Integer,Integer> giftMap(int numberOfParticipants){
 		Map<Integer,Integer> result=Maps.newHashMap();
 		final Random random=new Random();
 		List<Integer> remainingList = IntStream.range(0, numberOfParticipants).boxed().collect(Collectors.toList());
@@ -43,7 +43,7 @@ public class FirstAlgorthim {
 		return result;
 	}
 	
-	private static Selection getNextSelectionAndList(List<Integer> seedList,Random random){
+	static Selection getNextSelectionAndList(List<Integer> seedList,Random random){
 		final int nextPersonIndex=random.nextInt(seedList.size());
 		final int nextPerson=seedList.get(nextPersonIndex);
 		List<Integer> remainingList=seedList.stream().filter(person->person!=nextPerson).collect(Collectors.toList());
@@ -51,7 +51,7 @@ public class FirstAlgorthim {
 		
 	}
 	
-	public static class Selection{
+	private static class Selection{
 		private final int nextPerson;
 		private final List<Integer> remainingList;
 		private Selection(int nextPerson, List<Integer> remainingList) {

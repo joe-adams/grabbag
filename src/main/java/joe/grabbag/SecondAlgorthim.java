@@ -1,5 +1,6 @@
 package joe.grabbag;
 
+import java.math.BigInteger;
 import java.util.Collections;
 import java.util.List;
 import java.util.Map;
@@ -7,6 +8,7 @@ import java.util.Random;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
+
 
 
 
@@ -30,7 +32,7 @@ public class SecondAlgorthim {
 	
 	}
 	
-	private static Map<Integer,Integer> giftMap(int numberOfParticipants){
+	static Map<Integer,Integer> giftMap(int numberOfParticipants){
 		List<Integer> randomDerangement=randomDerangement(numberOfParticipants);
 		Map<Integer,Integer> resultAsMap=Maps.newHashMap();
 		for (int i=0;i<numberOfParticipants;i++){
@@ -40,8 +42,8 @@ public class SecondAlgorthim {
 		
 	}
 	
-	private static List<Integer> randomDerangement(int numberOfParticipants){
-		List<Long> d=derangementRecurrancces(numberOfParticipants+1);
+	static List<Integer> randomDerangement(int numberOfParticipants){
+		List<Double> d=derangementRecurrancces(numberOfParticipants+1);
 		final Random random=new Random();
 		List<Integer> swapList = IntStream.range(0, numberOfParticipants).boxed().collect(Collectors.toList());
 		List<Integer> markList=Lists.newArrayList(swapList);
@@ -66,7 +68,7 @@ public class SecondAlgorthim {
 		return swapList;
 	}
 	
-	private static int getNextSelection(List<Integer> list,Random random,int skip){
+	static int getNextSelection(List<Integer> list,Random random,int skip){
 		List<Integer> remainingList=list.stream().filter(number->number!=skip).collect(Collectors.toList());
 		final int nextIndex=random.nextInt(remainingList.size());
 		return remainingList.get(nextIndex);
@@ -74,12 +76,13 @@ public class SecondAlgorthim {
 		
 	}
 	
-	public static List<Long> derangementRecurrancces(int size){
-		List<Long> builder=Lists.newArrayListWithExpectedSize(size);
-		builder.add(1L);
-		builder.add(0L);
+	
+	static List<Double> derangementRecurrancces(int size){
+		List<Double> builder=Lists.newArrayListWithExpectedSize(size);
+		builder.add(1.0);
+		builder.add(0.0);
 		for (int i=2;i<=size;i++){
-			long d=(i-1)*(builder.get(i-1)+builder.get(i-2));
+			double d=(builder.get(i-1)+builder.get(i-2))*(i-1);
 			builder.add(d);
 		}
 		return ImmutableList.copyOf(builder);

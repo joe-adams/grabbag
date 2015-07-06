@@ -1,4 +1,4 @@
-package joe.derangements;
+package joe.grabbag;
 
 import java.util.List;
 import java.util.Map;
@@ -27,13 +27,13 @@ public class FirstAlgorthim {
 		Map<Integer,Integer> result=Maps.newHashMap();
 		final Random random=new Random();
 		List<Integer> remainingList = IntStream.range(0, numberOfParticipants).boxed().collect(Collectors.toList());
-		Selection getsLastGiftSelection=getNextPerson(remainingList,random);
+		Selection getsLastGiftSelection=getNextSelectionAndList(remainingList,random);
 		int getsLastGift=getsLastGiftSelection.getNextPerson();
 		
 		int giver=getsLastGift;
 		remainingList=getsLastGiftSelection.getRemainingList();
 		while(remainingList.size()>0){
-			Selection selection=getNextPerson(remainingList,random);
+			Selection selection=getNextSelectionAndList(remainingList,random);
 			int getter=selection.getNextPerson();
 			remainingList=selection.getRemainingList();
 			result.put(giver, getter);
@@ -43,7 +43,7 @@ public class FirstAlgorthim {
 		return result;
 	}
 	
-	private static Selection getNextPerson(List<Integer> seedList,Random random){
+	private static Selection getNextSelectionAndList(List<Integer> seedList,Random random){
 		final int nextPersonIndex=random.nextInt(seedList.size());
 		final int nextPerson=seedList.get(nextPersonIndex);
 		List<Integer> remainingList=seedList.stream().filter(person->person!=nextPerson).collect(Collectors.toList());

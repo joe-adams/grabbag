@@ -1,4 +1,4 @@
-package joe.derangements;
+package joe.grabbag;
 
 import java.util.Map;
 import java.util.Set;
@@ -15,7 +15,7 @@ public class Common {
 	}
 	
 	static void checkInput(final String[] participants){
-		if (participants.length==0){
+		if (participants.length<2){
 			throw new RuntimeException("No data");
 		}
 		final Set<String> participantCounter=ImmutableSet.copyOf(participants);

@@ -15,14 +15,15 @@ import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 
+/**
+ * http://epubs.siam.org/doi/pdf/10.1137/1.9781611972986.7
+ * I didn't invent this, but I pounded google until I found out I was looking for a "derangemnt"
+ * @author Joe
+ *
+ */
 public class SecondAlgorthim {
 	
 
-	/**
-	* @param participants list of individuals participating in the draw.
-	* @return the list of individuals paired with the participants where participants[0] is matched
-	* with assignments[0], participants[1] is matched with assignments[1], and so on.
-	*/
 	public static String[] generateAssignments(final String[] participants) {
 		Function<Integer,Map<Integer,Integer>> mapGenerator=SecondAlgorthim::giftMap;
 		return Common.generateAssignments(participants, mapGenerator);
@@ -52,8 +53,7 @@ public class SecondAlgorthim {
 				int j=getNextSelection(markList,random,i);
 				Collections.swap(swapList, i, j);
 				double p=random.nextDouble();
-				//if (p< ((u)*d.get(u-1)/d.get(u+1))){
-				if(false){
+				if (p< ((u-1)*d.get(u-2)/d.get(u))){
 					//Be sure to remove the item that equals j, not the jth item in the list by casting to Integer
 					markList.remove(new Integer(j));
 					u--;

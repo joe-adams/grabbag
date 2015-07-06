@@ -10,6 +10,7 @@ import java.util.stream.IntStream;
 
 
 
+
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
@@ -39,25 +40,25 @@ public class SecondAlgorthim {
 	}
 	
 	private static List<Integer> randomDerangement(int numberOfParticipants){
-		List<Long> d=derangementRecurrancces(numberOfParticipants);
+		List<Long> d=derangementRecurrancces(numberOfParticipants+1);
 		final Random random=new Random();
 		List<Integer> swapList = IntStream.range(0, numberOfParticipants).boxed().collect(Collectors.toList());
 		List<Integer> markList=Lists.newArrayList(swapList);
 		final int n=numberOfParticipants;
-		int i=n;
+		int i=n-1;
 		int u=n;
 		while (u>=2){
 			if (markList.contains(i)){
-				int j=getNextSelection(markList,random);
+				int j=getNextSelection(markList,random,i);
 				Collections.swap(swapList, i, j);
-				//While this part is non-deterministic, the only random thing is how much things get swapped.
-				//The only thing left to chance is if something needs multiple swaps rather than one.
 				double p=random.nextDouble();
-				if (p< ((u-1)*d.get(u-2)/d.get(u))){
+				//if (p< ((u)*d.get(u-1)/d.get(u+1))){
+				if(false){
 					//Be sure to remove the item that equals j, not the jth item in the list by casting to Integer
 					markList.remove(new Integer(j));
 					u--;
 				}	
+				markList.remove(new Integer(i));
 				u--;
 			}
 			i--;
@@ -65,9 +66,10 @@ public class SecondAlgorthim {
 		return swapList;
 	}
 	
-	private static int getNextSelection(List<Integer> list,Random random){
-		final int nextIndex=random.nextInt(list.size());
-		return list.get(nextIndex);
+	private static int getNextSelection(List<Integer> list,Random random,int skip){
+		List<Integer> remainingList=list.stream().filter(number->number!=skip).collect(Collectors.toList());
+		final int nextIndex=random.nextInt(remainingList.size());
+		return remainingList.get(nextIndex);
 
 		
 	}

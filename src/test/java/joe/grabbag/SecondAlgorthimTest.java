@@ -12,7 +12,7 @@ import com.google.common.collect.ImmutableSet;
 
 public class SecondAlgorthimTest {
 	
-	/*@Test
+	@Test
 	 public void firstTest(){
 		String[] input={"Joe","Macaire"};
 		String[] output=SecondAlgorthim.generateAssignments(input);
@@ -20,7 +20,7 @@ public class SecondAlgorthimTest {
 		assertEquals(output[0],"Macaire");
 		assertEquals(output[1],"Joe");
 		
-	}*/
+	}
 	
 	
 	@Test

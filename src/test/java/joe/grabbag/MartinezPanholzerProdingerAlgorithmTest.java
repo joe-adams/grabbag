@@ -11,13 +11,13 @@ import org.junit.Test;
 
 import com.google.common.collect.ImmutableSet;
 
-public class SecondAlgorthimTest {
+public class MartinezPanholzerProdingerAlgorithmTest {
 	
 	@Test
 	 public void firstTest(){
 		for (int i=0;i<20;i++){
 			String[] input={"Joe","Macaire"};
-			String[] output=SecondAlgorthim.generateAssignments(input);
+			String[] output=MartinezPanholzerProdingerAlgorithm.generateAssignments(input);
 			assertEquals(output.length,2);
 			assertEquals(output[0],"Macaire");
 			assertEquals(output[1],"Joe");
@@ -30,7 +30,7 @@ public class SecondAlgorthimTest {
 	 public void secondTest(){
 		for (int i=0;i<20;i++){
 			String[] input={"Joe","Macaire","Isabelle"};
-			String[] output=SecondAlgorthim.generateAssignments(input);
+			String[] output=MartinezPanholzerProdingerAlgorithm.generateAssignments(input);
 			assertEquals(output.length,3);
 			assertNotEquals(output[0],"Joe");
 			assertNotEquals(output[1],"Macaire");
@@ -48,7 +48,7 @@ public class SecondAlgorthimTest {
 	public void testgiftMap(){
 		for (int i=0;i<20;i++){
 			int size=100;
-			Map<Integer,Integer> map=SecondAlgorthim.giftMap(size);
+			Map<Integer,Integer> map=MartinezPanholzerProdingerAlgorithm.giftMap(size);
 			Set<Integer> keys=map.keySet();
 			Set<Integer> values=ImmutableSet.copyOf(map.values());
 			assertEquals(map.size(),size);

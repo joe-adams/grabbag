@@ -5,14 +5,14 @@ import static org.junit.Assert.*;
 import java.util.Map;
 import java.util.Set;
 
-import joe.grabbag.FirstAlgorthim;
+import joe.grabbag.JoeAlgorithm;
 
 import org.junit.Test;
 
 import com.google.common.collect.ImmutableSet;
 
 
-public class FirstAlgorthimTest{
+public class JoeAlgorithmTest{
 	
 	@Test
 	public void basic(){
@@ -22,7 +22,7 @@ public class FirstAlgorthimTest{
 	@Test
 	 public void firstTest(){
 		String[] input={"Joe","Macaire"};
-		String[] output=FirstAlgorthim.generateAssignments(input);
+		String[] output=JoeAlgorithm.generateAssignments(input);
 		assertEquals(output.length,2);
 		assertEquals(output[0],"Macaire");
 		assertEquals(output[1],"Joe");
@@ -33,7 +33,7 @@ public class FirstAlgorthimTest{
 	@Test
 	 public void secondTest(){
 		String[] input={"Joe","Macaire","Isabelle"};
-		String[] output=FirstAlgorthim.generateAssignments(input);
+		String[] output=JoeAlgorithm.generateAssignments(input);
 		assertEquals(output.length,3);
 		assertNotEquals(output[0],"Joe");
 		assertNotEquals(output[1],"Macaire");
@@ -49,7 +49,7 @@ public class FirstAlgorthimTest{
 	public void testgiftMap(){
 		for (int i=0;i<20;i++){
 			int size=100;
-			Map<Integer,Integer> map=FirstAlgorthim.giftMap(size);
+			Map<Integer,Integer> map=JoeAlgorithm.giftMap(size);
 			Set<Integer> keys=map.keySet();
 			Set<Integer> values=ImmutableSet.copyOf(map.values());
 			assertEquals(map.size(),size);

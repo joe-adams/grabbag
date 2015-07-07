@@ -24,15 +24,20 @@ import com.google.common.collect.Maps;
  * @author Joe
  *
  */
-public class SecondAlgorthim {
+public class MartinezPanholzerProdingerAlgorithm {
 	
 
 	public static String[] generateAssignments(final String[] participants) {
-		Function<Integer,Map<Integer,Integer>> mapGenerator=SecondAlgorthim::giftMap;
+		Function<Integer,Map<Integer,Integer>> mapGenerator=MartinezPanholzerProdingerAlgorithm::giftMap;
 		return Common.generateAssignments(participants, mapGenerator);
 	
 	}
 	
+	/**
+	 * Translate the result to the interface I made which represents the mapping of elements as a map.
+	 * @param numberOfParticipants
+	 * @return The result of the algorithm translated to the interface I made, which represents the mapping of elements as a map.
+	 */
 	static Map<Integer,Integer> giftMap(int numberOfParticipants){
 		List<Integer> randomDerangement=randomDerangement(numberOfParticipants);
 		Map<Integer,Integer> resultAsMap=Maps.newHashMap();
@@ -43,39 +48,52 @@ public class SecondAlgorthim {
 		
 	}
 	
+	/**
+	 * This is the algorithm from http://epubs.siam.org/doi/pdf/10.1137/1.9781611972986.7
+	 * @param numberOfParticipants
+	 * @return The random derangement from as a list.
+	 */
 	static List<Integer> randomDerangement(int numberOfParticipants){
 		List<Double> d=derangementRecurrancces(numberOfParticipants+1);
 		final Random random=new Random();
 		List<Integer> swapList = IntStream.range(0, numberOfParticipants).boxed().collect(Collectors.toList());
-		List<Integer> markList=Lists.newArrayList(swapList);
+		List<Integer> stillNeedsToBeSwapped=Lists.newArrayList(swapList);
 		final int n=numberOfParticipants;
-		int i=n-1;
-		int u=n;
-		while (u>=2){
-			if (markList.contains(i)){
-				int j=getNextSelection(markList,random,i);
-				Collections.swap(swapList, i, j);
+		for (int i=n-1;stillNeedsToBeSwapped.size()>=2;i--){
+			if (stillNeedsToBeSwapped.contains(i)){
+				int randomItemToSwap=getNextSelection(stillNeedsToBeSwapped,random,i);
+				Collections.swap(swapList, i, randomItemToSwap);
 				double p=random.nextDouble();
-				if (p< ((u-1)*d.get(u-2)/d.get(u))){
-					//Be sure to remove the item that equals j, not the jth item in the list by casting to Integer
-					markList.remove(new Integer(j));
-					u--;
+				//Note: Whether this loop is executed or not, the result will still be a proper derangement.
+				//The random calculation calibrates things so each permutation gets an equal chance.
+				if (p< ((stillNeedsToBeSwapped.size()-1)*d.get(stillNeedsToBeSwapped.size()-2)/d.get(stillNeedsToBeSwapped.size()))){
+					//Be sure to remove the item that equals randomItemToSwap, not the randomItemToSwap-th item in the list by casting to Integer
+					stillNeedsToBeSwapped.remove(new Integer(randomItemToSwap));
 				}	
-				markList.remove(new Integer(i));
-				u--;
+				//Remove the item that equals i, not the i-th item, by casting it to Integer.
+				stillNeedsToBeSwapped.remove(new Integer(i));
 			}
-			i--;
 		}
 		return swapList;
 	}
 	
+	/**
+	 * 
+	 * @param list to pick from
+	 * @param random generator
+	 * @param skip- the item we are swapping with.  Don't pick this one.
+	 * @return A random item to swap
+	 */
 	static int getNextSelection(List<Integer> list,Random random,int skip){
 		List<Integer> remainingList=list.stream().filter(number->number!=skip).collect(Collectors.toList());
 		final int nextIndex=random.nextInt(remainingList.size());
 		return remainingList.get(nextIndex);
 	}
 	
-	
+	/**
+	 * @param size of list
+	 * @return A list of the values for D subscript n from the paper.  This is the formula on the second column on the second page.
+	 */
 	static List<Double> derangementRecurrancces(int size){
 		List<Double> builder=Lists.newArrayListWithExpectedSize(size);
 		builder.add(1.0);
@@ -86,7 +104,5 @@ public class SecondAlgorthim {
 		}
 		return ImmutableList.copyOf(builder);
 	}
-	
-	
 	
 }

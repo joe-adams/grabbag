@@ -9,7 +9,7 @@ import java.util.stream.IntStream;
 
 import com.google.common.collect.Maps;
 
-public class FirstAlgorthim {
+public class JoeAlgorithm {
 	
 
 	/**
@@ -25,7 +25,7 @@ public class FirstAlgorthim {
 	* 
 	*/
 	public static String[] generateAssignments(final String[] participants) {
-		Function<Integer,Map<Integer,Integer>> mapGenerator=FirstAlgorthim::giftMap;
+		Function<Integer,Map<Integer,Integer>> mapGenerator=JoeAlgorithm::giftMap;
 		return Common.generateAssignments(participants, mapGenerator);
 	
 	}

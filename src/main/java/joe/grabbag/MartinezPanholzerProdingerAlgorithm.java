@@ -54,7 +54,7 @@ public class MartinezPanholzerProdingerAlgorithm {
 	 * @return The random derangement from as a list.
 	 */
 	static List<Integer> randomDerangement(int numberOfParticipants){
-		List<Double> d=derangementRecurrancces(numberOfParticipants+1);
+		List<Double> subfactorial=subfactorials(numberOfParticipants+1);
 		final Random random=new Random();
 		List<Integer> swapList = IntStream.range(0, numberOfParticipants).boxed().collect(Collectors.toList());
 		List<Integer> stillNeedsToBeSwapped=Lists.newArrayList(swapList);
@@ -66,7 +66,7 @@ public class MartinezPanholzerProdingerAlgorithm {
 				double p=random.nextDouble();
 				//Note: Whether this loop is executed or not, the result will still be a proper derangement.
 				//The random calculation calibrates things so each permutation gets an equal chance.
-				if (p< ((stillNeedsToBeSwapped.size()-1)*d.get(stillNeedsToBeSwapped.size()-2)/d.get(stillNeedsToBeSwapped.size()))){
+				if (p< ((stillNeedsToBeSwapped.size()-1)*subfactorial.get(stillNeedsToBeSwapped.size()-2)/subfactorial.get(stillNeedsToBeSwapped.size()))){
 					//Be sure to remove the item that equals randomItemToSwap, not the randomItemToSwap-th item in the list by casting to Integer
 					stillNeedsToBeSwapped.remove(new Integer(randomItemToSwap));
 				}	
@@ -94,7 +94,7 @@ public class MartinezPanholzerProdingerAlgorithm {
 	 * @param size of list
 	 * @return A list of the values for D subscript n from the paper.  This is the formula on the second column on the second page.
 	 */
-	static List<Double> derangementRecurrancces(int size){
+	static List<Double> subfactorials(int size){
 		List<Double> builder=Lists.newArrayListWithExpectedSize(size);
 		builder.add(1.0);
 		builder.add(0.0);

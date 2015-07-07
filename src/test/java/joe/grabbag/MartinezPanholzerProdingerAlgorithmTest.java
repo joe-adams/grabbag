@@ -4,11 +4,13 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotEquals;
 import static org.junit.Assert.assertTrue;
 
+import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
 import org.junit.Test;
 
+import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableSet;
 
 public class MartinezPanholzerProdingerAlgorithmTest {
@@ -62,6 +64,15 @@ public class MartinezPanholzerProdingerAlgorithmTest {
 				assertNotEquals(entry.getKey(),entry.getValue());
 			}
 		}
+	}
+	
+	@Test
+	public void testSubfactorials(){
+		List<Double> actualResult=MartinezPanholzerProdingerAlgorithm.subfactorials(10);
+		//http://reference.wolfram.com/language/ref/Subfactorial.html  We add a 1 as the 0th one.
+		List<Double> expectedResult=ImmutableList.of(1.,0.,1.0,2.,9.,44.,265.,1854.,14833.,133496.,1334961.);
+		assertEquals(actualResult,expectedResult);
+		
 	}
 
 }

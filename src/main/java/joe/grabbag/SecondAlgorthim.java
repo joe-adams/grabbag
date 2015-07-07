@@ -1,6 +1,5 @@
 package joe.grabbag;
 
-import java.math.BigInteger;
 import java.util.Collections;
 import java.util.List;
 import java.util.Map;
@@ -19,7 +18,9 @@ import com.google.common.collect.Maps;
 
 /**
  * http://epubs.siam.org/doi/pdf/10.1137/1.9781611972986.7
- * I didn't invent this, but I pounded google until I found out I was looking for a "derangemnt"
+ * I didn't invent this, but I pounded google until I found out I was looking for a "derangement"
+ * https://en.wikipedia.org/wiki/Derangement
+ * This is a random derangement generator.  Every derangement of the initial array is equally likely to appear as the output.
  * @author Joe
  *
  */
@@ -72,8 +73,6 @@ public class SecondAlgorthim {
 		List<Integer> remainingList=list.stream().filter(number->number!=skip).collect(Collectors.toList());
 		final int nextIndex=random.nextInt(remainingList.size());
 		return remainingList.get(nextIndex);
-
-		
 	}
 	
 	

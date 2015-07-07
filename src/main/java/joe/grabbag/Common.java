@@ -8,6 +8,12 @@ import com.google.common.collect.ImmutableSet;
 
 public class Common {
 	
+	/**
+	* @param participants list of individuals participating in the draw.
+	* @param mapGenerator function
+	* @return the list of individuals paired with the participants where participants[0] is matched
+	* with assignments[0], participants[1] is matched with assignments[1], and so on.
+	*/
 	public static String[] generateAssignments(final String[] participants, Function<Integer,Map<Integer,Integer>> mapGenerator) {
 		checkInput(participants);
 		Map<Integer,Integer> mapping=mapGenerator.apply(participants.length);

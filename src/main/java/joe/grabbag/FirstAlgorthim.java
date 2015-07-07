@@ -13,9 +13,16 @@ public class FirstAlgorthim {
 	
 
 	/**
-	* @param participants list of individuals participating in the draw.
-	* @return the list of individuals paired with the participants where participants[0] is matched
-	* with assignments[0], participants[1] is matched with assignments[1], and so on.
+	* Simple algorthim of my own devising.
+	* Picks a person to receive the last gift and give the first gift.  
+	* Picks someone to receive the first gift and give the second.
+	* The person that receives that gift gets the third, etc.
+	* Everyone gives and receives one gift.
+	* No one gives to themselves.
+	* There order is almost random, although there will never be any "loops".
+	* So if there are more than two people and Alice gives Bob a gift, Bob will not give Alice the gift.
+	* Likewise, if there are more than three people and Alice gives to Bob and Bob gives to Craig, Craig will not give to Alice.
+	* 
 	*/
 	public static String[] generateAssignments(final String[] participants) {
 		Function<Integer,Map<Integer,Integer>> mapGenerator=FirstAlgorthim::giftMap;
@@ -51,6 +58,9 @@ public class FirstAlgorthim {
 		
 	}
 	
+	/**
+	 * Utility class.  Holds the result of getNextSelectionAndList, so one function can get neatly get two things.
+	 */
 	private static class Selection{
 		private final int nextPerson;
 		private final List<Integer> remainingList;

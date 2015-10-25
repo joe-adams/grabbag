@@ -1,0 +1,1 @@
+A permutation of your input list with no item in its original place.  A very efficent grabbag generator.
